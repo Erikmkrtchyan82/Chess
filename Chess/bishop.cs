@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls;
 
 namespace Chess
 {
     class bishop:figure
     {
-        public bishop(int x, int y) : this(new point(x, y)) { }
-        public bishop(point pos) : base(pos) { }
+        public bishop(int x, int y, Color color) : this(new point(x, y), color) { }
+        public bishop(point pos, Color color) : base(pos, color) {
+            image = new Image();
+            this.weight = 33;
+            path = "b.gif";
+        }
         public static void bishop_moves(chess_t moves, point pos, bool moved)
         {
             if (!moved)

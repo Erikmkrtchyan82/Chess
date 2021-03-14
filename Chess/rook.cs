@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls;
 
 namespace Chess
 {
     class rook:figure
     {
-        public rook(int x, int y) : this(new point(x, y)) { }
-        public rook(point pos) : base(pos) { }
+        public rook(int x, int y, Color color) : this(new point(x, y), color) { }
+        public rook(point pos, Color color) : base(pos, color) {
+            image = new Image();
+            this.weight = 50;
+            path = "r.gif";
+        }
         public static void rook_moves(chess_t moves, point pos, bool moved)
         {
             if (!moved)

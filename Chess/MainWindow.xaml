@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="300" Width="532">
     <Grid>
-
+        <Image Name="board" Source="/resources/board.jpg" Width="256" Height="256" Margin="0,0,256,0"  />
+		<Image Name="x" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" MouseEnter="mouse"/>
     </Grid>
 </Window>

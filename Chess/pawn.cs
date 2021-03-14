@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls;
 
 namespace Chess
 {
     class pawn:figure
     {
-        pawn(int x, int y) : this(new point(x, y)) { }
-        pawn(point pos) : base(pos) { }
+        public pawn(int x, int y, Color color) : this(new point(x, y), color) { }
+        public pawn(point pos, Color color) : base(pos, color) {
+            image = new Image();
+            this.weight = 10;
+            path = "p.gif";
+        }
 
         public override chess_t get_moves()
         {
@@ -31,5 +36,6 @@ namespace Chess
         }
 
         private bool is_first_move = true;
+
     }
 }
