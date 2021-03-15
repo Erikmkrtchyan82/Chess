@@ -9,7 +9,6 @@ namespace Chess
     {
         public queen(int x, int y,Color color) : this(new point(x, y),color) { }
         public queen(point pos, Color color) : base(pos, color) {
-            image = new Image();
             this.weight = 90;
             path = "q.gif";
         }

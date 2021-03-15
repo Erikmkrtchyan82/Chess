@@ -64,6 +64,7 @@ namespace Chess
     {
         public chess_t(int x=-1, int y=-1)
         {
+            moves = new List<point>();
             add(x, y);
         }
 

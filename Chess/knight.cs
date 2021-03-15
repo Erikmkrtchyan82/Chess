@@ -9,7 +9,6 @@ namespace Chess
     {
         public knight(int x, int y,Color color) : this(new point(x, y),color) { }
         public knight(point pos, Color color) : base(pos, color) {
-            image = new Image();
             this.weight = 30;
             path = "n.gif";
         }

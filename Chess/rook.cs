@@ -9,7 +9,6 @@ namespace Chess
     {
         public rook(int x, int y, Color color) : this(new point(x, y), color) { }
         public rook(point pos, Color color) : base(pos, color) {
-            image = new Image();
             this.weight = 50;
             path = "r.gif";
         }

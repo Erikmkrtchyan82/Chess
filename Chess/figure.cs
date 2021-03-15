@@ -1,19 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace Chess
 {
+    class field:Image
+    {
+        public field()
+        {
+            Source = new BitmapImage(new Uri("/resources/ramka.gif", UriKind.Relative));
+        }
+    }
+    public enum Color { BLACK, WHITE };
     abstract class figure
     {
-        public figure(point pos,Color color)
+        public figure(point pos, Color color)
         {
+            image = new Image();
+            image.Width = 32;
+            image.Height = 32;
+            image.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            image.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+            image.Margin = new Thickness(10, 0, 0, 14);
+
+            moves = new chess_t();
+
             this.color = color;
             this.pos = pos;
             moved = true;
-            //get_moves();
+            get_moves();
             moved = false;
         }
         public void set_position(int x, int y)
@@ -27,7 +45,8 @@ namespace Chess
         protected point pos;
         protected chess_t moves;
         public bool moved;
-        public enum Color {BLACK,WHITE};
+
+        public point position() { return this.pos; }
 
         protected Color color;
 

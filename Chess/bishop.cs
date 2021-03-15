@@ -9,7 +9,6 @@ namespace Chess
     {
         public bishop(int x, int y, Color color) : this(new point(x, y), color) { }
         public bishop(point pos, Color color) : base(pos, color) {
-            image = new Image();
             this.weight = 33;
             path = "b.gif";
         }
