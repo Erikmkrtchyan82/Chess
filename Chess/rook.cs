@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
@@ -12,22 +13,106 @@ namespace Chess
             this.weight = 50;
             path = "r";
         }
-        public static void rook_moves(chess_t moves, point pos)
+        public static void rook_moves(chess_t moves, point pos, board board)
         {
-            for (int i = 0; i < 8; ++i)
+            for (int i = pos.x + 1; i < 8; ++i)
             {
+                if(board.has_figure_at(i, pos.y))
+                {
+                    figure f = board.figure_at(i, pos.y);
+                    if (f != null && f.color != board.figure_at(pos).color)
+                    {
+                        field field = new field("hit.png");
+                        field.Margin = new Thickness(
+                            field.standard_thickness.Left + figure.Size * i,
+                            0,
+                            0,
+                            field.standard_thickness.Bottom + figure.Size * pos.y
+                            );
+                        field.position = f.get_position();
+                        board.moves.Add(field);
+                        board.get_grid().Children.Add(field);
+                    }
+                    break;
+                }
                 moves.add(i, pos.y);
-                moves.add(pos.x, i);
+            }
+
+            for (int i = pos.x - 1; i >= 0; --i)
+            {
+                if(board.has_figure_at(i, pos.y))
+                {
+                    figure f = board.figure_at(i, pos.y);
+                    if (f != null && f.color != board.figure_at(pos).color)
+                    {
+                        field field = new field("hit.png");
+                        field.Margin = new Thickness(
+                            field.standard_thickness.Left + figure.Size * i,
+                            0,
+                            0,
+                            field.standard_thickness.Bottom + figure.Size * pos.y
+                            );
+                        field.position = f.get_position();
+                        board.moves.Add(field);
+                        board.get_grid().Children.Add(field);
+                    }
+                    break;
+                }
+                moves.add(i, pos.y);
+            }
+
+            for (int j = pos.y + 1; j < 8 ; ++j)
+            {
+                if (board.has_figure_at(pos.x, j))
+                {
+                    figure f = board.figure_at(pos.x, j);
+                    if (f != null && f.color != board.figure_at(pos).color)
+                    {
+                        field field = new field("hit.png");
+                        field.Margin = new Thickness(
+                            field.standard_thickness.Left + figure.Size * pos.x,
+                            0,
+                            0,
+                            field.standard_thickness.Bottom + figure.Size * j
+                            );
+                        field.position = f.get_position();
+                        board.moves.Add(field);
+                        board.get_grid().Children.Add(field);
+                    }
+                    break;
+                }
+                moves.add(pos.x, j);
+            }
+
+            for (int j = pos.y - 1; j >= 0; --j)
+            {
+                if (board.has_figure_at(pos.x, j))
+                {
+                    figure f = board.figure_at(pos.x, j);
+                    if (f != null && f.color != board.figure_at(pos).color)
+                    {
+                        field field = new field("hit.png");
+                        field.Margin = new Thickness(
+                            field.standard_thickness.Left + figure.Size * pos.x,
+                            0,
+                            0,
+                            field.standard_thickness.Bottom + figure.Size * j
+                            );
+                        field.position = f.get_position();
+                        board.moves.Add(field);
+                        board.get_grid().Children.Add(field);
+                    }
+                    break;
+                }
+                moves.add(pos.x, j);
             }
         }
 
-        public override chess_t get_moves()
+        public override chess_t get_moves(board board)
         {
-            if (moved)
-            {
-                moves.clear();
-                rook_moves(moves, pos);
-            }
+            moves.clear();
+            rook_moves(moves, pos, board);
+
             return moves;
         }
         public override void set_position(point pos)
@@ -35,7 +120,6 @@ namespace Chess
             if (chess_t.check(pos))
             {
                 this.pos = pos;
-                moved = true;
             }
         }
     }

@@ -40,6 +40,8 @@ namespace Chess
             InitializeComponent();
 
             brd = new board(table);
+
+            standard();
         }
 
         private void standard()

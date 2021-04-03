@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Chess
@@ -12,7 +13,7 @@ namespace Chess
             this.weight = 33;
             path = "b";
         }
-        public static void bishop_moves(chess_t moves, point pos)
+        public static void bishop_moves(chess_t moves, point pos, board board)
         {
             int[] coords = { 1, 1, -1, -1, 1 };
 
@@ -23,19 +24,34 @@ namespace Chess
 
                 while (x >= 0 && x <= 7 && y >= 0 && y <= 7)
                 {
+                    if (board.has_figure_at(x, y))
+                    {
+                        figure f = board.figure_at(x, y);
+                        if(f!=null && f.color != board.figure_at(pos).color)
+                        {
+                            field field = new field("hit.png");
+                            field.Margin = new Thickness(
+                                field.standard_thickness.Left + figure.Size * x,
+                                0,
+                                0,
+                                field.standard_thickness.Bottom + figure.Size * y
+                                );
+                            field.position = f.get_position();
+                            board.moves.Add(field);
+                            board.get_grid().Children.Add(field);
+                        }
+                        break;
+                    }
                     moves.add(x, y);
                     x = x + coords[i];
                     y = y + coords[i + 1];
                 }
             }
         }
-        public override chess_t get_moves()
+        public override chess_t get_moves(board board)
         {
-            if (moved)
-            {
-                moves.clear();
-                bishop_moves(moves, pos);
-            }
+            moves.clear();
+            bishop_moves(moves, pos,board);
             return moves;
         }
         public override void set_position(point pos)
@@ -43,7 +59,6 @@ namespace Chess
             if (chess_t.check(pos))
             {
                 this.pos = pos;
-                moved = true;
             }
         }
 

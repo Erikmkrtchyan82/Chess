@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
@@ -14,17 +15,13 @@ namespace Chess
         }
 
 
-        public override chess_t get_moves()
+        public override chess_t get_moves(board board)
         {
-            if (moved)
-            {
-                moves.clear();
-                knight_moves();
-            }
-
+            moves.clear();
+            knight_moves(board);
             return moves;
         }
-        private void knight_moves()
+        private void knight_moves(board board)
         {
             int[] arr = { 1, 1, -1, -1, 1 };
 
@@ -36,8 +33,51 @@ namespace Chess
             */
             for (int i = 0; i < 4; ++i)
             {
-                moves.add(pos.x + arr[i] * 1, pos.y + arr[i + 1] * 2);
-                moves.add(pos.x + arr[i] * 2, pos.y + arr[i + 1] * 1);
+                int x1 = pos.x + arr[i] * 1;
+                int y1 = pos.y + arr[i + 1] * 2;
+
+                int x2= pos.x + arr[i] * 2;
+                int y2=pos.y + arr[i + 1] * 1;
+
+                if (!board.has_figure_at(x1,y1)) 
+                    moves.add(x1, y1);
+                else
+                {
+                    figure f = board.figure_at(x1, y1);
+                    if (f != null && f.color != board.figure_at(pos).color)
+                    {
+                        field field = new field("hit.png");
+                        field.Margin = new Thickness(
+                            field.standard_thickness.Left + figure.Size * x1,
+                            0,
+                            0,
+                            field.standard_thickness.Bottom + figure.Size * y1
+                            );
+                        field.position = f.get_position();
+                        board.moves.Add(field);
+                        board.get_grid().Children.Add(field);
+                    }
+                }
+
+                if (!board.has_figure_at(x2, y2))
+                    moves.add(x2, y2);
+                else
+                {
+                    figure f = board.figure_at(x2,y2);
+                    if (f != null && f.color != board.figure_at(pos).color)
+                    {
+                        field field = new field("hit.png");
+                        field.Margin = new Thickness(
+                            field.standard_thickness.Left + figure.Size * x2,
+                            0,
+                            0,
+                            field.standard_thickness.Bottom + figure.Size * y2
+                            );
+                        field.position = f.get_position();
+                        board.moves.Add(field);
+                        board.get_grid().Children.Add(field);
+                    }
+                }
             }
         }
 
@@ -46,7 +86,6 @@ namespace Chess
             if (chess_t.check(pos))
             {
                 this.pos = pos;
-                moved = true;
             }
         }
     }

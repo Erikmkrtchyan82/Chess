@@ -10,12 +10,11 @@ namespace Chess
     abstract class figure
     {
         public const int Size = 32*2;
-        public bool moved;
         public Image image { protected set; get; }
         protected const string extension = ".png";
         protected point pos;
         protected chess_t moves;
-        protected Color color;
+        public Color color { private set; get; }
         private int _weight;
         private string _path;
         public field field { protected set; get; }
@@ -35,11 +34,6 @@ namespace Chess
 
             this.color = color;
             this.pos = field.position = pos;
-            moved = true;
-            get_moves();
-            moved = false;
-
-            
         }
         public void set_position(int x, int y)
         {
@@ -47,7 +41,7 @@ namespace Chess
         }
 
         public abstract void set_position(point pos);
-        public abstract chess_t get_moves();  
+        public abstract chess_t get_moves(board board);  
         public point get_position() { return this.pos; }
         public int weight {
             get { return _weight; }

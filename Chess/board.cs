@@ -16,7 +16,7 @@ namespace Chess
 
 
         public figure GetField() { return figures[2]; }
-        public Grid get() { return _grid; }
+        public Grid get_grid() { return _grid; }
         public board(Grid table)
         {
             if (_grid == null)
@@ -43,6 +43,11 @@ namespace Chess
             _grid.Children.Add(f.image);
             figures.Add(f);
         }
+        public void remove(figure f)
+        {
+            figures.Remove(f);
+            _grid.Children.Remove(f.image);
+        }
         public void clear()
         {
             clear_figures();
@@ -52,28 +57,42 @@ namespace Chess
         {
             foreach (figure img in figures)
                 _grid.Children.Remove(img.image);
+            figures.Clear();
         }
         public void clear_moves()
         {
             foreach (field f in moves)
                 _grid.Children.Remove(f);
+            moves.Clear();
         }
         public void clear_selected()
         {
             _grid.Children.Remove(selected_figure?.field);
             selected_figure = null;
         }
+        public bool has_figure_at(int x, int y)
+        {
+            return figure_at(x, y) != null;
+        }
+        public figure figure_at(point p)
+        {
+            return figure_at(p.x, p.y);
+        }
+        public figure figure_at(int x, int y)
+        {
+            return figures.Find((figure f) => { return f.get_position().x == x && f.get_position().y == y; });
+        }
         public void set_moves(int x, int y)
         {
             clear_moves();
             clear_selected();
 
-            figure figure = figures.Find((figure f)=>{ return f.get_position().x == x && f.get_position().y == y; });
+            figure figure = figure_at(x, y);
             if (figure != null) set_moves(figure);
         }
         private void set_moves(figure f)
         {
-            foreach(point p in f.get_moves().moves)
+            foreach(point p in f.get_moves(this).moves)
             {
                 field a = new field();
                 double x = a.Margin.Left + figure.Size * p.x;

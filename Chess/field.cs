@@ -8,11 +8,13 @@ namespace Chess
 {
     class field :Image
     {
+        public string path { private set; get; }
         public point position;
         public static Thickness standard_thickness= new Thickness(10, 0, 0, 14);
         public field(string path= "field.png")
         {
             Source = new BitmapImage(new Uri("/resources/"+path, UriKind.Relative));
+            this.path = path;
             Width = Height = figure.Size;
 
             HorizontalAlignment = HorizontalAlignment.Left;
@@ -32,6 +34,12 @@ namespace Chess
                     Margin.Right,
                     Margin.Bottom
                     );
+
+                if (path.StartsWith("hit"))
+                {
+                    board.self().remove(board.self().figure_at(position));
+                }
+
                 board.selected_figure.set_position(position);
             }
             

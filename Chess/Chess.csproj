@@ -16,7 +16,7 @@
     <None Remove="resources\bq.png" />
     <None Remove="resources\br.png" />
     <None Remove="resources\field.png" />
-    <None Remove="resources\ramka.gif" />
+    <None Remove="resources\hit.png" />
     <None Remove="resources\select.png" />
     <None Remove="resources\wb.png" />
     <None Remove="resources\white.jpg" />
@@ -55,7 +55,7 @@
     <Resource Include="resources\field.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\ramka.gif">
+    <Resource Include="resources\hit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\select.png">
