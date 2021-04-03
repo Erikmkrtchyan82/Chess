@@ -5,11 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="MainWindow" Height="320" Width="532">
-    <Grid Name="table">
-        <Image Name="board" Source="/resources/board.jpg" Width="256" Height="256" Margin="10,0,0,14" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-        <TextBlock Name="txt" Text="Standard" Width="50" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,50,0" MouseDown="m"/>
-		<TextBlock Width="50" Height="20" Text="Clear" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,120,50,0" MouseDown="m1"/>
+        Title="MainWindow" Height="640" Width="1064">
+    <Grid Name="table" MouseDown="MouseDown">
+        <Image Name="board" Source="/resources/board.jpg" Width="512" Height="512" Margin="10,0,0,14" 
+               HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+        <TextBlock Name="txt" Text="Standard" Width="50" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                   Margin="0,100,50,0" MouseDown="standard"/>
+		<TextBlock Width="50" Height="20" Text="Clear" HorizontalAlignment="Right" VerticalAlignment="Top" 
+		           Margin="0,120,50,0" MouseDown="clear"/>
+        <TextBox Name="coordx" Width="80" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,150,50,0" Text="0"/>
+        <TextBox Name="coordy" Width="80" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,190,50,0" Text="0"/>
 
     </Grid>
 </Window>

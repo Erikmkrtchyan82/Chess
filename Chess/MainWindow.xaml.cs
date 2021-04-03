@@ -40,9 +40,6 @@ namespace Chess
             InitializeComponent();
 
             brd = new board(table);
-
-            
-
         }
 
         private void standard()
@@ -74,15 +71,34 @@ namespace Chess
             }
         }
 
-        private void m(object sender, MouseButtonEventArgs e)
+        private void standard(object sender, MouseButtonEventArgs e)
         {
             standard();
-            brd.set_moves(brd.GetField());
         }
 
-        private void m1(object sender, MouseButtonEventArgs e)
+        private void clear(object sender, MouseButtonEventArgs e)
         {
             brd.clear();
+        }
+
+        /*
+        private void click(object sender, MouseEventArgs e)
+        {
+            coordx.Text = ""+(Mouse.GetPosition(this).X-board.Margin.Left);
+            // TODO: 640 is wrong
+            coordy.Text = "" + (Math.Abs(640 - Mouse.GetPosition(this).Y) - 38 - 14);  
+        }
+        */
+
+        private void MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            coordx.Text = "" + ((e.GetPosition(this).X - board.Margin.Left) / figure.Size);
+            coordy.Text = "" + ((Math.Abs(640 - e.GetPosition(this).Y) - 38 - 14) / figure.Size);
+
+            brd.set_moves(
+                (int)((e.GetPosition(this).X - board.Margin.Left) / figure.Size),
+                (int)((Math.Abs(640 - e.GetPosition(this).Y) - 38 - 14) / figure.Size)
+                );
         }
     }
 }

@@ -10,13 +10,10 @@ namespace Chess
         public bishop(int x, int y, Color color) : this(new point(x, y), color) { }
         public bishop(point pos, Color color) : base(pos, color) {
             this.weight = 33;
-            path = "b.gif";
+            path = "b";
         }
-        public static void bishop_moves(chess_t moves, point pos, bool moved)
+        public static void bishop_moves(chess_t moves, point pos)
         {
-            if (!moved)
-                return;
-
             int[] coords = { 1, 1, -1, -1, 1 };
 
             for (int i = 0; i < 4; ++i)
@@ -34,7 +31,11 @@ namespace Chess
         }
         public override chess_t get_moves()
         {
-            bishop_moves(moves, pos, moved);
+            if (moved)
+            {
+                moves.clear();
+                bishop_moves(moves, pos);
+            }
             return moves;
         }
         public override void set_position(point pos)

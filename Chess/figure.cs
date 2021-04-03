@@ -7,32 +7,39 @@ using System.Windows.Media.Imaging;
 
 namespace Chess
 {
-    class field:Image
-    {
-        public field()
-        {
-            Source = new BitmapImage(new Uri("/resources/ramka.gif", UriKind.Relative));
-        }
-    }
-    public enum Color { BLACK, WHITE };
     abstract class figure
     {
+        public const int Size = 32*2;
+        public bool moved;
+        public Image image { protected set; get; }
+        protected const string extension = ".png";
+        protected point pos;
+        protected chess_t moves;
+        protected Color color;
+        private int _weight;
+        private string _path;
+        public field field { protected set; get; }
+
         public figure(point pos, Color color)
         {
             image = new Image();
-            image.Width = 32;
-            image.Height = 32;
-            image.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-            image.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+            image.Width = Size;
+            image.Height = Size;
+            image.HorizontalAlignment = HorizontalAlignment.Left;
+            image.VerticalAlignment = VerticalAlignment.Bottom;
             image.Margin = new Thickness(10, 0, 0, 14);
 
             moves = new chess_t();
 
+            field = new field("select.png");
+
             this.color = color;
-            this.pos = pos;
+            this.pos = field.position = pos;
             moved = true;
             get_moves();
             moved = false;
+
+            
         }
         public void set_position(int x, int y)
         {
@@ -40,17 +47,8 @@ namespace Chess
         }
 
         public abstract void set_position(point pos);
-        public abstract chess_t get_moves();
-
-        protected point pos;
-        protected chess_t moves;
-        public bool moved;
-
-        public point position() { return this.pos; }
-
-        protected Color color;
-
-        private int _weight;
+        public abstract chess_t get_moves();  
+        public point get_position() { return this.pos; }
         public int weight {
             get { return _weight; }
             protected set {
@@ -61,19 +59,18 @@ namespace Chess
             }
         }
 
-        private string _path;
         protected string path {
             set
             {
                 if (color == Color.BLACK)
-                    _path = "/resources/b" + value;
+                    _path = "/resources/b" + value+extension;
                 else
-                    _path = "/resources/w" + value;
+                    _path = "/resources/w" + value+extension;
 
                 image.Source= new BitmapImage(new Uri(_path,UriKind.Relative));
             }
             get { return _path; }
         }
-        public Image image { protected set; get; }
+
     }
 }

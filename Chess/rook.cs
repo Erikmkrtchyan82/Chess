@@ -10,15 +10,10 @@ namespace Chess
         public rook(int x, int y, Color color) : this(new point(x, y), color) { }
         public rook(point pos, Color color) : base(pos, color) {
             this.weight = 50;
-            path = "r.gif";
+            path = "r";
         }
-        public static void rook_moves(chess_t moves, point pos, bool moved)
+        public static void rook_moves(chess_t moves, point pos)
         {
-            if (!moved)
-                return;
-
-            moves = new chess_t();
-
             for (int i = 0; i < 8; ++i)
             {
                 moves.add(i, pos.y);
@@ -28,7 +23,11 @@ namespace Chess
 
         public override chess_t get_moves()
         {
-            rook_moves(moves, pos, moved);
+            if (moved)
+            {
+                moves.clear();
+                rook_moves(moves, pos);
+            }
             return moves;
         }
         public override void set_position(point pos)

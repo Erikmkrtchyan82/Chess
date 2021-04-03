@@ -11,14 +11,22 @@ namespace Chess
         public king(int x, int y,Color color) : this(new point(x, y),color) { }
         public king(point pos, Color color) : base(pos, color) {
             this.weight = 1000;
-            path = "k.gif";
+            path = "k";
         }
+
+
         public override chess_t get_moves()
         {
-            if (!moved)
-                return moves;
-
-            for(int i = pos.x-1; i <= pos.x+1; ++i)
+            if (moved)
+            {
+                moves.clear();
+                king_moves();
+            }
+            return moves;
+        }
+        private void king_moves()
+        {
+            for (int i = pos.x-1; i <= pos.x+1; ++i)
             {
                 for(int j = pos.y - 1; j <= pos.y + 1; ++j)
                 {
@@ -26,8 +34,6 @@ namespace Chess
                     moves.add(i, j);
                 }
             }
-
-            return moves;
         }
 
         public override void set_position(point pos)

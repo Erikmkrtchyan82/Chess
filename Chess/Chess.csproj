@@ -7,71 +7,79 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="resources\bb.gif" />
-    <None Remove="resources\bk.gif" />
+    <None Remove="resources\bb.png" />
+    <None Remove="resources\bk.png" />
     <None Remove="resources\black.jpg" />
-    <None Remove="resources\bn.gif" />
+    <None Remove="resources\bn.png" />
     <None Remove="resources\board.jpg" />
-    <None Remove="resources\bp.gif" />
-    <None Remove="resources\bq.gif" />
-    <None Remove="resources\br.gif" />
+    <None Remove="resources\bp.png" />
+    <None Remove="resources\bq.png" />
+    <None Remove="resources\br.png" />
+    <None Remove="resources\field.png" />
     <None Remove="resources\ramka.gif" />
-    <None Remove="resources\wb.gif" />
+    <None Remove="resources\select.png" />
+    <None Remove="resources\wb.png" />
     <None Remove="resources\white.jpg" />
-    <None Remove="resources\wk.gif" />
-    <None Remove="resources\wn.gif" />
-    <None Remove="resources\wp.gif" />
-    <None Remove="resources\wq.gif" />
-    <None Remove="resources\wr.gif" />
+    <None Remove="resources\wk.png" />
+    <None Remove="resources\wn.png" />
+    <None Remove="resources\wp.png" />
+    <None Remove="resources\wq.png" />
+    <None Remove="resources\wr.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="resources\bb.gif">
+    <Resource Include="resources\bb.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\bk.gif">
+    <Resource Include="resources\bk.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\black.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\bn.gif">
+    <Resource Include="resources\bn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\board.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\bp.gif">
+    <Resource Include="resources\bp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\bq.gif">
+    <Resource Include="resources\bq.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\br.gif">
+    <Resource Include="resources\br.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\field.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\ramka.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\wb.gif">
+    <Resource Include="resources\select.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\wb.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\white.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\wk.gif">
+    <Resource Include="resources\wk.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\wn.gif">
+    <Resource Include="resources\wn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\wp.gif">
+    <Resource Include="resources\wp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\wq.gif">
+    <Resource Include="resources\wq.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\wr.gif">
+    <Resource Include="resources\wr.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
