@@ -83,14 +83,9 @@ namespace Chess
             brd.clear();
         }
 
-        /*
-        private void click(object sender, MouseEventArgs e)
-        {
-            coordx.Text = ""+(Mouse.GetPosition(this).X-board.Margin.Left);
-            // TODO: 640 is wrong
-            coordy.Text = "" + (Math.Abs(640 - Mouse.GetPosition(this).Y) - 38 - 14);  
-        }
-        */
+       
+
+
 
         private void MouseDown(object sender, MouseButtonEventArgs e)
         {
