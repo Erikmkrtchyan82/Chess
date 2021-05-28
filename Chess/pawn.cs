@@ -16,28 +16,28 @@ namespace Chess
             path = "p";
         }
 
-        public override chess_t get_moves(board board)
+        public override chess_t get_moves()
         {
             moves.clear();
-            pawn_moves(board);
+            pawn_moves();
 
             return moves;
         }
-        private void pawn_moves(board board)
+        private void pawn_moves()
         {
             int count = color == Color.WHITE ? 1 : -1;
 
-            if (!board.has_figure_at(pos.x, pos.y+ count))
+            if (!board.self().has_figure_at(pos.x, pos.y+ count))
                 moves.add(pos.x, pos.y + count);
             
-            if (is_first_move && !board.has_figure_at(pos.x, pos.y + 2 * count))
+            if (is_first_move && !board.self().has_figure_at(pos.x, pos.y + 2 * count))
                 moves.add(pos.x, pos.y + 2*count);
 
             int x1 = pos.x - count;
             int x2 = pos.x + count;
             int y = pos.y + count;
-            figure figure1 = board.figure_at(x1, y);
-            figure figure2 = board.figure_at(x2, y);
+            figure figure1 = board.self().figure_at(x1, y);
+            figure figure2 = board.self().figure_at(x2, y);
             
             if(figure1!=null && figure1.color!=this.color)
             {
@@ -49,8 +49,8 @@ namespace Chess
                     field.standard_thickness.Bottom + figure.Size * y
                     );
                 d.position = figure1.get_position();
-                board.moves.Add(d);
-                board.get_grid().Children.Add(d);
+                board.self().moves.Add(d);
+                board.self().get_grid().Children.Add(d);
             }
 
             if (figure2 != null && figure2.color != this.color)
@@ -63,8 +63,8 @@ namespace Chess
                     field.standard_thickness.Bottom + figure.Size * y
                     );
                 d.position = figure2.get_position();
-                board.moves.Add(d);
-                board.get_grid().Children.Add(d);
+                board.self().moves.Add(d);
+                board.self().get_grid().Children.Add(d);
             }
 
         }

@@ -13,7 +13,7 @@ namespace Chess
             this.weight = 33;
             path = "b";
         }
-        public static void bishop_moves(chess_t moves, point pos, board board)
+        public static void bishop_moves(chess_t moves, point pos)
         {
             int[] coords = { 1, 1, -1, -1, 1 };
 
@@ -24,10 +24,10 @@ namespace Chess
 
                 while (x >= 0 && x <= 7 && y >= 0 && y <= 7)
                 {
-                    if (board.has_figure_at(x, y))
+                    if (board.self().has_figure_at(x, y))
                     {
-                        figure f = board.figure_at(x, y);
-                        if(f!=null && f.color != board.figure_at(pos).color)
+                        figure f = board.self().figure_at(x, y);
+                        if(f!=null && f.color != board.self().figure_at(pos).color)
                         {
                             field field = new field("hit.png");
                             field.Margin = new Thickness(
@@ -37,8 +37,9 @@ namespace Chess
                                 field.standard_thickness.Bottom + figure.Size * y
                                 );
                             field.position = f.get_position();
-                            board.moves.Add(field);
-                            board.get_grid().Children.Add(field);
+                            board.self().moves.Add(field);
+                            board.self().get_grid().Children.Add(field);
+                            moves.add(x, y);
                         }
                         break;
                     }
@@ -48,10 +49,10 @@ namespace Chess
                 }
             }
         }
-        public override chess_t get_moves(board board)
+        public override chess_t get_moves()
         {
             moves.clear();
-            bishop_moves(moves, pos,board);
+            bishop_moves(moves, pos);
             return moves;
         }
         public override void set_position(point pos)

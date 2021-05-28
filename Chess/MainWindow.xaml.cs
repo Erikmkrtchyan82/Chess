@@ -31,6 +31,7 @@ namespace Chess
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    
     public partial class MainWindow : Window
     {
         board brd;
@@ -39,6 +40,8 @@ namespace Chess
         {
             InitializeComponent();
 
+            board.Width = 8 * figure.Size;
+            board.Height = 8 * figure.Size;
             brd = new board(table);
 
             standard();
@@ -46,6 +49,8 @@ namespace Chess
 
         private void standard()
         {
+            brd.clear();
+
             brd.add(new rook(0, 0, Color.WHITE));
             brd.add(new rook(7, 0, Color.WHITE));
             brd.add(new rook(0, 7, Color.BLACK));
@@ -82,15 +87,6 @@ namespace Chess
         {
             brd.clear();
         }
-
-        /*
-        private void click(object sender, MouseEventArgs e)
-        {
-            coordx.Text = ""+(Mouse.GetPosition(this).X-board.Margin.Left);
-            // TODO: 640 is wrong
-            coordy.Text = "" + (Math.Abs(640 - Mouse.GetPosition(this).Y) - 38 - 14);  
-        }
-        */
 
         private void MouseDown(object sender, MouseButtonEventArgs e)
         {

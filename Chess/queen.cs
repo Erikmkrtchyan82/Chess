@@ -13,11 +13,11 @@ namespace Chess
             path = "q";
         }
 
-        public override chess_t get_moves(board board)
+        public override chess_t get_moves()
         {
             moves.clear();
-            bishop.bishop_moves(moves, pos, board);
-            rook.rook_moves(moves, pos, board);
+            bishop.bishop_moves(moves, pos);
+            rook.rook_moves(moves, pos);
             return moves;
         }
         public override void set_position(point pos)

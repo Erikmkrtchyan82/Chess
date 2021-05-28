@@ -13,7 +13,8 @@ namespace Chess
         public List<figure> figures { private set; get; }
         public List<field> moves { private set; get; }
         public static figure selected_figure;
-
+        public static Color prev_color = Color.BLACK;
+        public static field check;
 
         public figure GetField() { return figures[2]; }
         public Grid get_grid() { return _grid; }
@@ -27,7 +28,6 @@ namespace Chess
                 _self = this;
             }
         }
-
         public static board self()
         {
             return _self;
@@ -50,6 +50,7 @@ namespace Chess
         }
         public void clear()
         {
+            prev_color = Color.BLACK;
             clear_figures();
             clear_moves();
         }
@@ -88,11 +89,14 @@ namespace Chess
             clear_selected();
 
             figure figure = figure_at(x, y);
-            if (figure != null) set_moves(figure);
+            if (figure != null && figure.color != prev_color)
+            {
+                set_moves(figure);
+            }
         }
         private void set_moves(figure f)
         {
-            foreach(point p in f.get_moves(this).moves)
+            foreach(point p in f.get_moves().moves)
             {
                 field a = new field();
                 double x = a.Margin.Left + figure.Size * p.x;
@@ -120,6 +124,11 @@ namespace Chess
 
             selected_figure = f;
 
+        }
+
+        public figure get_king(Color color)
+        {
+            return figures.Find((figure f) => f is king && f.color == color);
         }
     }
 }

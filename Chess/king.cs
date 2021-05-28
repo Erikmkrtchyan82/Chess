@@ -16,24 +16,24 @@ namespace Chess
         }
 
 
-        public override chess_t get_moves(board board)
+        public override chess_t get_moves()
         {
             moves.clear();
-            king_moves(board);
+            king_moves();
             return moves;
         }
         
-        private void king_moves(board board)
+        private void king_moves()
         {
             for (int i = pos.x-1; i <= pos.x+1; ++i)
             {
                 for(int j = pos.y - 1; j <= pos.y + 1; ++j)
                 {
                     if (i == pos.x && j == pos.y) continue;
-                    if (board.has_figure_at(i, j))
+                    if (board.self().has_figure_at(i, j))
                     {
-                        figure f = board.figure_at(i,j);
-                        if (f != null && f.color != board.figure_at(pos).color)
+                        figure f = board.self().figure_at(i,j);
+                        if (f != null && f.color != board.self().figure_at(pos).color)
                         {
                             field field = new field("hit.png");
                             field.Margin = new Thickness(
@@ -43,8 +43,8 @@ namespace Chess
                                 field.standard_thickness.Bottom + figure.Size * j
                                 );
                             field.position = f.get_position();
-                            board.moves.Add(field);
-                            board.get_grid().Children.Add(field);
+                            board.self().moves.Add(field);
+                            board.self().get_grid().Children.Add(field);
                         }
                         continue;
                     }

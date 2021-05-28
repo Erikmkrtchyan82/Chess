@@ -41,7 +41,7 @@ namespace Chess
         }
 
         public abstract void set_position(point pos);
-        public abstract chess_t get_moves(board board);  
+        public abstract chess_t get_moves();  
         public point get_position() { return this.pos; }
         public int weight {
             get { return _weight; }

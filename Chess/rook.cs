@@ -13,14 +13,14 @@ namespace Chess
             this.weight = 50;
             path = "r";
         }
-        public static void rook_moves(chess_t moves, point pos, board board)
+        public static void rook_moves(chess_t moves, point pos)
         {
             for (int i = pos.x + 1; i < 8; ++i)
             {
-                if(board.has_figure_at(i, pos.y))
+                if(board.self().has_figure_at(i, pos.y))
                 {
-                    figure f = board.figure_at(i, pos.y);
-                    if (f != null && f.color != board.figure_at(pos).color)
+                    figure f = board.self().figure_at(i, pos.y);
+                    if (f != null && f.color != board.self().figure_at(pos).color)
                     {
                         field field = new field("hit.png");
                         field.Margin = new Thickness(
@@ -30,8 +30,9 @@ namespace Chess
                             field.standard_thickness.Bottom + figure.Size * pos.y
                             );
                         field.position = f.get_position();
-                        board.moves.Add(field);
-                        board.get_grid().Children.Add(field);
+                        board.self().moves.Add(field);
+                        board.self().get_grid().Children.Add(field);
+                        moves.add(i, pos.y);
                     }
                     break;
                 }
@@ -40,10 +41,10 @@ namespace Chess
 
             for (int i = pos.x - 1; i >= 0; --i)
             {
-                if(board.has_figure_at(i, pos.y))
+                if(board.self().has_figure_at(i, pos.y))
                 {
-                    figure f = board.figure_at(i, pos.y);
-                    if (f != null && f.color != board.figure_at(pos).color)
+                    figure f = board.self().figure_at(i, pos.y);
+                    if (f != null && f.color != board.self().figure_at(pos).color)
                     {
                         field field = new field("hit.png");
                         field.Margin = new Thickness(
@@ -53,8 +54,8 @@ namespace Chess
                             field.standard_thickness.Bottom + figure.Size * pos.y
                             );
                         field.position = f.get_position();
-                        board.moves.Add(field);
-                        board.get_grid().Children.Add(field);
+                        board.self().moves.Add(field);
+                        board.self().get_grid().Children.Add(field);
                     }
                     break;
                 }
@@ -63,10 +64,10 @@ namespace Chess
 
             for (int j = pos.y + 1; j < 8 ; ++j)
             {
-                if (board.has_figure_at(pos.x, j))
+                if (board.self().has_figure_at(pos.x, j))
                 {
-                    figure f = board.figure_at(pos.x, j);
-                    if (f != null && f.color != board.figure_at(pos).color)
+                    figure f = board.self().figure_at(pos.x, j);
+                    if (f != null && f.color != board.self().figure_at(pos).color)
                     {
                         field field = new field("hit.png");
                         field.Margin = new Thickness(
@@ -76,8 +77,8 @@ namespace Chess
                             field.standard_thickness.Bottom + figure.Size * j
                             );
                         field.position = f.get_position();
-                        board.moves.Add(field);
-                        board.get_grid().Children.Add(field);
+                        board.self().moves.Add(field);
+                        board.self().get_grid().Children.Add(field);
                     }
                     break;
                 }
@@ -86,10 +87,10 @@ namespace Chess
 
             for (int j = pos.y - 1; j >= 0; --j)
             {
-                if (board.has_figure_at(pos.x, j))
+                if (board.self().has_figure_at(pos.x, j))
                 {
-                    figure f = board.figure_at(pos.x, j);
-                    if (f != null && f.color != board.figure_at(pos).color)
+                    figure f = board.self().figure_at(pos.x, j);
+                    if (f != null && f.color != board.self().figure_at(pos).color)
                     {
                         field field = new field("hit.png");
                         field.Margin = new Thickness(
@@ -99,8 +100,8 @@ namespace Chess
                             field.standard_thickness.Bottom + figure.Size * j
                             );
                         field.position = f.get_position();
-                        board.moves.Add(field);
-                        board.get_grid().Children.Add(field);
+                        board.self().moves.Add(field);
+                        board.self().get_grid().Children.Add(field);
                     }
                     break;
                 }
@@ -108,10 +109,10 @@ namespace Chess
             }
         }
 
-        public override chess_t get_moves(board board)
+        public override chess_t get_moves()
         {
             moves.clear();
-            rook_moves(moves, pos, board);
+            rook_moves(moves, pos);
 
             return moves;
         }
